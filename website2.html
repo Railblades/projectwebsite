@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    	<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    	<title>DriftCast</title>
+    	<style>
+
+		body {
+            		font-family: Arial, sans-serif;
+            		margin: 0;
+            		padding: 0;
+            		background-color: #1b2838;
+            		color: white;
+            		overflow-x: hidden;
+            		display: flex;
+            		flex-direction: column;
+            		min-height: 100vh;
+        		}
+				
+		#main-content {
+					overflow-x: hidden;
+				}
+				
+        	header {
+            		background-color: #171a21;
+            		display: flex;
+            		align-items: center;
+            		padding: 25px 20px;
+            		position: fixed;
+            		top: 0;
+            		width: 100%;
+            		z-index: 1000;
+            		justify-content: center;
+        		}
+
+	        header nav {
+			display: flex;
+            		justify-content: center;
+            		gap: 15px;
+        		}
+
+        	header a {
+            		text-decoration: none;
+            		color: white;
+            		font-size: 25px;
+            		padding: 5px 20px;
+            		border-radius: 5px;
+        		}
+
+        	header a:hover {
+            		color: #4d8cbb;
+            		background-color: #2a475e;
+        		}
+
+		#logo-button {
+		            position: absolute;
+		            left: 25px;
+ 			}
+
+ 	       	#logo-button img {
+ 	           	height: 50px;
+            		width: 50px;
+            		border-radius: 5px;
+            		cursor: pointer;
+        		}
+
+        	#main-content {
+            		text-align: center;
+            		margin-top: 60px;
+            		padding: 20px;
+            		flex: 1;
+            		overflow-y: auto;
+            		opacity: 1;
+           		transition: opacity 0.5s ease-in-out;
+        		}
+
+        	footer {
+		        background-color: #171a21;
+	            	color: white;
+            		padding: 20px;
+            		text-align: center;
+            		width: 100%;
+        		}
+
+        	.homestorebutton {
+            		text-decoration: none;
+					background-color: #171a21;
+            		color: white;
+            		font-size: 25px;
+            		padding: 5px 20px;
+            		border-radius: 5px;
+					position: relative;
+					height: 50px;
+					width: 300px;
+					margin-bottom: 400px;
+					cursor: pointer;
+					}	
+
+        	.sidebar {
+            		width: 200px;
+            		background-color: #171a21;
+            		padding: 20px;
+            		position: fixed;
+            		left: 0;
+            		top: 60px;
+            		height: 100%;
+            		z-index: 999;
+            		display: flex;
+            		flex-direction: column;
+            		align-items: flex-start;
+        		}
+
+		.sidebartext {
+            		color: gray;
+            		border: none;
+            		text-align: left;
+            		font-size: 18px;
+            		border-radius: 5px;
+            		margin-bottom: 15px;
+			width: 100%;
+        		}			
+
+        	.sidebar button {
+            		background-color: #171a21;
+            		color: lightgray;
+            		border: none;
+			text-align: left;
+            		font-size: 18px;
+            		border-radius: 5px;
+            		margin-bottom: 15px;
+           		width: 100%;
+            		cursor: pointer;
+        		}
+
+        	.sidebar button:hover {
+            		color: #3a6b8c;
+        		}
+
+		.homestorebutton:hover {
+            		color: white;
+            		background-color: darkgray;
+			}
+
+		.homeheading {
+			position: relative;
+    			font-size: 2em;
+    			margin-top: 125px;
+    			margin-bottom: 20px;
+			}
+
+		.hometext {
+    			font-size: 1.2em;
+    			position: relative;
+    			margin-bottom: 50px;
+			}
+
+		.storeheading {
+    			font-size: 1em;
+    			margin-top: 125px;
+    			margin-bottom: 10px;
+			margin-right: 400px;
+			}
+		
+		.aboutheading {
+				fill: none;
+    			font-size: 2.5em;
+    			margin-top: 75px;
+    			margin-bottom: 100px;
+				position: center;
+			}
+			
+		.abouttext {
+    			font-size: 1.2em;
+    			position: relative;
+    			margin-right: 600px;
+			}
+
+		.supportheading {
+    			font-size: 2em;
+    			margin-top: 75px;
+    			margin-bottom: 20px;
+			margin-right: 750px;
+			}
+
+		.supporttext {
+			color: lightgray;
+    			font-size: 1.2em;
+    			position: relative;
+    			margin-right: 735px;	
+			margin-bottom: 100px;
+			}
+
+        	.supportcenterheading {
+            		font-size: 1.5em;
+            		margin-bottom: 20px;
+			}
+
+		.supportcentertext {
+    			font-size: 1.2em;
+    			position: relative;
+    			margin-right: 655px;
+			margin-bottom: 100px;
+			}
+
+		.supportbutton {
+            		color: white;
+            		background-color: #2a3d54;
+			border-color: #2a3d54;
+            		text-decoration: none;
+            		font-size: 20px;
+			height: 40px;
+			width: 550px;
+            		border-radius: 0px;
+			cursor: pointer;
+			}
+
+		.supportbutton:hover {
+            		color: white;
+            		background-color: #46648a;
+			}
+
+        	.copyrighttext {
+		        font-size: 1.2em;
+        		}
+
+		.card {
+            		background-color: #232323;
+            		padding: 25px;
+					position: relative;
+					width: 850px;
+					height: 150px;
+            		border-radius: 10px;
+            		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            		transition: transform 0.3s ease;
+					
+					margin-bottom: 20px; 
+					bottom: 350px; 
+					left: 275px; 
+					justify-content: center; 
+					display: flex; 
+					max-width: 850px; 
+					padding: 25px;
+        		}
+				
+		.precard {
+            		background-color: #232323;
+            		padding: 25px;
+					position: relative;
+					width: 850px;
+					left: 260px;
+            		border-radius: 10px;
+            		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            		transition: transform 0.3s ease;
+        		}
+				
+				.precard:hover {
+            		transform: scale(1.05);
+        		}
+
+        	.card:hover {
+            		transform: scale(1.05);
+        		}
+
+        	.card h3 {
+					position: absolute;
+					text-align: center;	
+					font-size: 20px;
+					right: 0px;
+        		}
+				
+			.cardtext {
+					position: absolute;
+					text-align: center;
+            		top: 70px;
+					right 0px;
+        		}	
+
+        	.card button {
+            		background-color: #4d8cbb;
+					position: absolute;
+            		color: white;
+            		border: none;
+					width: 125px;
+					height: 50px;
+					top: 140px;
+            		padding: 10px;
+            		border-radius: 5px;
+            		cursor: pointer;
+        		}
+				
+			.cardbutton {
+            		background-color: #4d8cbb;
+					position: relative;
+            		color: white;
+            		border: none;
+            		padding: 10px;
+            		border-radius: 5px;
+            		cursor: pointer;
+        		}
+
+        	.card button:hover {
+            		color: #4d8cbb;
+            		background-color: #2a475e;
+        		}
+				
+			.cardbutton:hover {
+            		color: #4d8cbb;
+            		background-color: #2a475e;
+        		}
+
+        	.close {
+            		position: absolute;
+            		top: 10px;
+            		right: 10px;
+            		font-size: 30px;
+            		color: black;
+            		cursor: pointer;
+        		}
+
+		.popup-background {
+    			position: fixed;
+    			top: 0;
+    			left: 0;
+    			width: 100%;
+    			height: 100%;
+    			background-color: rgba(0, 0, 0, 0.5);
+    			display: flex;
+    			justify-content: center;
+    			align-items: center;
+    			z-index: 1001;
+			}
+
+		.popup-container {
+    			background-color: black;
+    			padding: 30px;
+    			border-radius: 8px;
+    			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    			width: 400px;
+    			text-align: center;
+				position: relative;
+				z-index: 1002
+			}
+
+		.popup-container input,
+		.popup-container textarea {
+    			width: 100%;
+    			margin: 10px 0;
+    			padding: 10px;
+    			border-radius: 5px;
+    			border: 1px solid #ccc;
+			}
+
+		.popup-container button {
+    			background-color: rgb(40, 40, 40);
+    			color: white;
+    			padding: 10px;
+    			border: none;
+    			border-radius: 5px;
+    			cursor: pointer;
+    			margin: 10px;
+			}
+
+		.popup-container button:hover {
+				color: #4d8cbb;
+            	background-color: #2a475e;
+			}
+
+		.blurred {
+    			filter: blur(50px);
+    			pointer-events: none;
+			}
+			
+	</style>
+
+<script>
+
+	<!--PAGES CONTENT-->
+	const pageContent = {
+		<!--HOME-->
+        	home: 
+                "<h2 class='homeheading'>DriftCast</h2>" +
+                "<p class='hometext'>The site where you can <br>play, discover, and create games. <br>We hope you enjoy your stay.</p>" +
+				"<p style='font-size: 1.4em; position: center; margin-top: 100px; margin-bottom: 20px;'>Browse around the store to get started!</p>" +
+				"<button class='homestorebutton' onclick='loadContent(\"store\")'> [ Go to STORE ] </button>" +
+				"<p style='position: relative;'>________________________________________________________________________________________________________________________</p>" +
+				"<style>" + 
+					"#main-content {" +
+						"background: linear-gradient(135deg, #1b2838, #3d597c);" +
+						"background-size: cover;" +
+						"color: white;" +
+						"padding: 20px;" +
+						"position: relative;" +
+						"}" +
+			
+					"#main-content::before {" +
+						"content: '';" +
+						"position: fixed;" +
+						"top: 0;" +
+						"left: 0;" +
+						"right: 0;" +
+						"bottom: 0;" +
+						"background-image: url('icebackground.png');" + 
+						"background-size: cover;" +
+						"background-position: center;" +
+						"filter: opacity(0.05);" +
+						"z-index: 0;" +
+						"}" +	
+		"		</style>" ,
+		<!--STORE-->
+            	store: 
+                "<div class='sidebar'>" +
+				"<p class='sidebartext' style='position: relative; top: 50px; left: 5px;'>HOME</p>" +
+                    	"<button onclick='scrollToTop()' style='position: relative; top: 50px;'>Featured Games</button>" +
+
+				"<p class='sidebartext' style='position: relative; top: 100px; left: 5px;'>CATEGORIES</p>" +
+                    	"<button onclick='releasecategory()' style='position: relative; top: 100px;'>Newly Released</button>" +
+						
+                "</div>" +
+				
+				"<h2 class='storeheading'>FEATURED GAMES</h2>" +
+				
+				"<div class='precard' style='margin-bottom: 20px; position: relative; background-color: #232323; width: 850px; height: 150px; top: 20px; left: 275px;' justify-content: center; display: flex; margin: 0 auto; max-width: 850px; padding: 25px;>" +
+				"<img src='amiya.png' style='border-radius: 10px; position: relative; height: 175px; width: 175px; bottom: 12px; right: 350px;'>" +
+				"<p style='position: relative; font-size: 50px; bottom: 235px; right: 150px;'>Awkdays</p>" +
+				"<p style='color: gray; text-align: left; position: relative; font-size: 20px; bottom: 280px; left: 175px;'>Togethew with youw weadew Amiya, you’ww wecwuit opewatows, twain them <br>then assign them to vawious opewations to pwotect da innocent and wesist <br>those who wouwd thwust da wowwd into tuwmoiw.</p>" +
+				"<button class='cardbutton' onclick='downloadGame()' style='position: relative; bottom: 295px; left: 400px;'>Download</button>" +
+				"</div>" +
+				"<div class='precard' style='position: relative; background-color: #232323; width: 850px; height: 150px; top: 20px; left: 275px; ' justify-content: center; display: flex; margin: 0 auto; max-width: 850px; padding: 25px;>" +
+				"<img src='chess.png' style='border-radius: 10px; position: relative; height: 175px; width: 175px; bottom: 12px; right: 350px;'>" +
+				"<p style='position: relative; font-size: 50px; bottom: 235px; right: 160px;'>Chess 2</p>" +
+				"<p style='color: gray; text-align: left; position: relative; font-size: 20px; bottom: 280px; left: 175px;'>After the intercontinental ballistic missile hit the Black Queen,<br> the bishop squad is dispatched to rescue trapped pawns in central city<br>Playing as of them, you feel in the atmosphere that something is wrong.</p>" +
+				"<button class='cardbutton' onclick='downloadGame()' style='position: relative; bottom: 295px; left: 400px;'>Download</button>" +
+				"</div>" +
+				"<h2 class='storeheading' id='releasecategory' style='position: relative; top: 75px; right: 0px;'>NEWLY RELEASED</h2>" +
+				"<button onclick='addCard()' class='homestorebutton' style='height: 40px; width: 40px; text-decoration: none; background-color: s171a21; border-radius: 5px; position: relative; text-align: center; padding: 0px 0px; left: 555px; bottom: 700px;'>+</button>" +
+				"<button onclick='Help()' class='homestorebutton' style='height: 40px; width: 40px; text-decoration: none; background-color: #171a21; border-radius: 5px; position: relative; text-align: center; padding: 0px 0px; left: 460px; bottom: 700px;'>?</button>" +
+				
+				"<div id='cards-container'></div>" +
+                "<div class='store-content'>" +
+				"<style>" + 
+					"#main-content {" +
+						"background: linear-gradient(135deg, #1b2838, #3d597c);" +
+						"background-size: cover;" +
+						"color: white;" +
+						"padding: 20px;" +
+						"position: relative;" +
+						"}" +
+				"</style>",
+			 <!--Remove these linebreaks after contents get added in-->
+
+		<!--ABOUT-->
+            	about: 
+				"<h2 class='aboutheading'>About Us</h2>" +
+                "<p class='abouttext' style='font-size: 30px; position: relative; right: 142px; margin-bottom: 20px;'>DriftCast</p>" +
+				"<p class='abouttext' style='color: lightgray; font-size: 25px; position: relative; right: 75px; margin-bottom: 20px;'>WEB DEVELOPERS :</p>" +
+				"<p style='right: 200px; bottom: 10px; position: relative; color: darkgray;'>_____________________________________________________________________________</p>" +
+				"<p class='abouttext' style='color: white; left: 85px; font-size: 20x; top: 20px;'>ADRIAN BAUTISTA BICLAR<br>| Programmer | Web Designer | Website Deployer |</p>" +
+				"<p class='abouttext' style='color: white; left: 97px; font-size: 20px; top: 20px;'>ZACHARY BENEDICT EMANO CANDELARIO<br>| Programmer | Bug Fixer |</p>" +
+				"<p style='right: 200px; top: 25px; position: relative; color: darkgray; margin-bottom: 300px;'>_____________________________________________________________________________</p>" +
+				"<style>" + 
+					"#main-content {" +
+						"background: linear-gradient(135deg, #1b2838, #3d597c);" +
+						"background-size: cover;" +
+						"color: white;" +
+						"padding: 20px;" +
+						"position: relative;" +
+						"}" +
+				"</style>",
+		<!--SUPPORT-->
+            	support: 
+                "<h2 class='supportheading'>Support Center</h2>" +
+                "<p class='supporttext'>What do you need help with?</p>" +
+
+		"<h3 class='supportcenterheading' style='margin-right: 875px;'>Games</h3>" +
+		<!--Buttons-->
+		"<button class='supportbutton' onclick='supporta()' style='position: relative; right: 205px; text-align: left;'> I'm having trouble with installation</button>" +
+		"<p><br></p>" +
+		"<button class='supportbutton' onclick='supportglobal()' style='position: relative; bottom: 40px; right: 205px; text-align: left; margin-bottom: 0px'>I have another problem</button>" +
+
+		"<h3 class='supportcenterheading' style='margin-right: 830px;'>Purchases</h3>" +
+		<!--Buttons-->
+		"<button class='supportbutton' onclick='supportb()' style='position: relative; right: 205px; text-align: left;'>Game/s I purchased disappeared from my Inventory</button>" +
+		"<p><br></p>" +
+		"<button class='supportbutton' onclick='supportglobal()' style='position: relative; bottom: 40px; right: 205px; text-align: left; margin-bottom: 0px'>I have another problem</button>" +
+
+
+		"<h3 class='supportcenterheading' style='margin-right: 855px;'>Account</h3>" +
+		<!--Buttons-->
+		"<button class='supportbutton' onclick='supportc()' style='position: relative; right: 205px; text-align: left;'>I cannot sync my Email Account</button>" +
+		"<p><br></p>" +
+		"<button class='supportbutton' onclick='supportglobal()' style='position: relative; bottom: 40px; right: 205px; text-align: left; margin-bottom: 300px'>I have another problem</button>" +
+        "<style>" + 
+			"#main-content {" +
+				"background: linear-gradient(135deg, #1b2838, #3d597c);" +
+				"background-size: cover;" +
+				"color: white;" +
+				"padding: 20px;" +
+				"position: relative;" +
+				"}" +
+		"</style>"
+		};
+
+	<!--FADE IN FUNCTION-->
+        function loadContent(page) {
+		const contentArea = document.getElementById("main-content");
+            	contentArea.style.opacity = "0";
+            	setTimeout(() => {
+                	contentArea.innerHTML = pageContent[page];
+                	contentArea.style.opacity = "1";
+            		}, 600);
+        	}	
+
+	<!--UNUSED?-->
+	function openModal(game) {
+    		const modal = document.createElement("div");
+    		modal.classList.add("modal");
+    		modal.innerHTML = `
+        <div class="modal-content">
+            	<span class="close" onclick="closeModal()">&times;</span>
+            	<h3>${game.title}</h3>
+            	<p>${game.description}</p>
+            	<p>Name: ${game.name}</p>
+            	<p><img src="${game.image}" alt="${game.title}" style="width: 100px; height: 100px; object-fit: cover;"></p>
+        </div>
+	`	;
+    	document.body.appendChild(modal);
+    	modal.style.display = "flex";
+	}
+
+	function closeModal() {
+    		const modal = document.querySelector(".modal");
+    		document.body.removeChild(modal);
+		}
+
+	function addCard() {
+    		const formHTML = `
+        		<div class="popup-background" style="top: 30px;">
+            			<div class="popup-container">
+                		<h3 style="position: center; font-size: 25px;">Publish a New Game</h3>
+                		<label for="gameTitle">Game Title:</label>
+                		<input type="text" id="gameTitle" placeholder="Enter game title." style="position: relative; right: 8px;">
+                		<label for="gameDescription">Description:</label>
+                		<textarea id="gameDescription" placeholder="Enter game description."style="position: relative; right: 8px;"></textarea>
+                		<label for="gameImage">Game Icon:</label>
+                		<input type="text" id="gameImage" placeholder="Enter game image URL."style="position: relative; right: 8px;">
+                		<button onclick="createCard()" style="position: relative; top: 10px;">Publish</button>
+                		<button onclick="closePopup()" style="position: relative; top: 10px;">Cancel</button>
+            		</div>
+        	</div>
+			
+    `		;
+
+    	const popupContainer = document.createElement("div");
+    	popupContainer.innerHTML = formHTML;
+    	document.body.appendChild(popupContainer);
+
+    	document.querySelector("#main-content").classList.add("blurred");
+	}
+
+	function closePopup() {
+    		const popup = document.querySelector(".popup-background");
+    		if (popup) popup.remove();
+
+   		 document.querySelector("#main-content").classList.remove("blurred");
+		}
+
+	function downloadGame() {
+    		alert("The game has been downloaded successfully!");
+		}
+
+	function createCard() {
+    		const title = document.getElementById("gameTitle").value;
+    		const description = document.getElementById("gameDescription").value;
+    		const image = document.getElementById("gameImage").value;
+		
+    	if (!title || !description || !image) {
+        	alert("Please fill out all fields!");
+        	return;
+    		}
+	
+    	const cardContainer = document.getElementById("cards-container");
+    	const newCard = document.createElement("div");
+    	newCard.classList.add("card");
+		
+    	newCard.innerHTML = `
+        	<h3>${title}</h3>
+        	<p>${description}</p>
+			<img src="${image}" alt="${title}" style="width: 150px; height: 150px; border-radius: 10px; position: relative;">
+        	<button onclick="addToCart({ title: '${title}', description: '${description}', image: '${image}' })">Add to Cart</button>
+    `		;
+	
+			newCard.innerHTML = cardHTML;
+    		cardContainer.appendChild(newCard);
+    		closePopup();
+		}
+
+	function closePopup() {
+    		const popup = document.querySelector(".popup-background");
+    		if (popup) popup.remove();
+
+    		document.querySelector("#main-content").classList.remove("blurred");
+		}
+
+		window.onload = () => {
+    		const cartModal = document.createElement("div");
+    		cartModal.classList.add("cart-modal");
+    		cartModal.innerHTML = `
+        		<p></p> <!-- Dynamic cart content will go here -->
+    `		;
+    		document.body.appendChild(cartModal);
+		};
+
+	window.onload = () => loadContent('home');
+		function createCard() {
+			const title = document.getElementById("gameTitle").value;
+			const description = document.getElementById("gameDescription").value;
+			const image = document.getElementById("gameImage").value;
+
+			if (!title || !description || !image) {
+			alert("Please fill out all fields!");
+			return;
+			}	
+
+	const cardContainer = document.getElementById("cards-container");
+    	const newCard = document.createElement("div");
+    	newCard.classList.add("card");
+    	newCard.innerHTML = `
+        <h3 style='position: relative; text-align: center;'>${title}</h3>
+        <p class='cardtext'>${description}</p>
+        <button onclick="downloadGame()">Download</button>
+    `	;
+    	cardContainer.appendChild(newCard);
+
+    	closePopup();
+	}
+
+	function closePopup() {
+    		const popup = document.querySelector(".popup-background");
+    		if (popup) popup.remove();
+
+    		document.querySelector("#main-content").classList.remove("blurred");
+		}
+		
+	<!--Help Button-->
+		function Help() {
+    		const formHTML = `
+        		<div class="popup-background">
+            			<div class="popup-container" style="height: 300px;">
+                		<h3 style='font-size: 20px; position: relative; bottom: 10px;'>HELP - Game Upload</h3>
+                		<p style='text-align: left;'>How do I upload my own game?<br></p>
+                		<p style='text-align: left;'>>Click the "!" Button to open the upload tab.</p>
+						<p style='text-align: left;'>>Fill out the Game Title, Description and Image URL Requirements.</p>
+						
+						<p style='text-align: center; font-size: 20px; color: darkred;'><br><br>[ NOTE ]<br>THIS FEATURE IS CURRENTLY IN BETA.</p>
+						<p style='text-align: center; font-size: 15px; color: white;'>There may be bugs with this feature at the moment.</p>
+						<button onclick="closePopup()" style="width: 35px; position: relative; left: 200px; bottom: 360px;">X</button>
+            		</div>
+        	</div>
+				
+    `		;
+
+    	const popupContainer = document.createElement("div");
+    	popupContainer.innerHTML = formHTML;
+    	document.body.appendChild(popupContainer);
+
+    	document.querySelector("#main-content").classList.add("blurred");
+	}
+
+	<!--Support Global-->
+		function supportglobal() {
+    		const formHTML = `
+        		<div class="popup-background">
+						<div class="popup-container" style="height: 300px;">
+                		<h3 style="position: center; font-size: 25px;">Support Center</h3>
+                		<label for="gameTitle">Specific Problem: </label>
+                		<input type="text" id="gameTitle" placeholder="Specify the Issue/Problem." style="position: relative; right: 8px;">
+                		<label for="gameDescription">Description:</label>
+                		<textarea id="gameDescription" placeholder="Explain said Issue/Problem."style="position: relative; right: 8px;"></textarea>
+                		<button onclick="closePopup()" style="position: relative; top: 10px;">Submit</button>
+                		<button onclick="closePopup()" style="position: relative; top: 10px;">Cancel</button>
+            		</div>
+        	</div>
+				
+    `		;
+
+    	const popupContainer = document.createElement("div");
+    	popupContainer.innerHTML = formHTML;
+    	document.body.appendChild(popupContainer);
+
+    	document.querySelector("#main-content").classList.add("blurred");
+	}
+
+	<!--Support A-->
+		function supporta() {
+    		const formHTML = `
+        		<div class="popup-background">
+						<div class="popup-container" style="height: 300px;">
+                		<h3 style="position: center; font-size: 25px;">Support Center</h3>
+                		<label for="gameTitle">I'm having trouble with installation<br><br><br></label>
+                		<label for="gameDescription">Description:</label>
+                		<textarea id="gameDescription" placeholder="Explain said Issue/Problem."style="position: relative; right: 8px;"></textarea>
+                		<button onclick="closePopup()" style="position: relative; top: 10px;">Submit</button>
+                		<button onclick="closePopup()" style="position: relative; top: 10px;">Cancel</button>
+            		</div>
+        	</div>
+				
+    `		;
+
+    	const popupContainer = document.createElement("div");
+    	popupContainer.innerHTML = formHTML;
+    	document.body.appendChild(popupContainer);
+
+    	document.querySelector("#main-content").classList.add("blurred");
+	}
+
+	<!--Support B-->
+		function supportb() {
+    		const formHTML = `
+        		<div class="popup-background">
+						<div class="popup-container" style="height: 300px;">
+                		<h3 style="position: center; font-size: 25px;">Support Center</h3>
+                		<label for="gameTitle">Game/s I purchased disappeared from my Inventory<br><br><br></label>
+                		<label for="gameDescription">Description:</label>
+                		<textarea id="gameDescription" placeholder="Explain said Issue/Problem."style="position: relative; right: 8px;"></textarea>
+                		<button onclick="closePopup()" style="position: relative; top: 10px;">Submit</button>
+                		<button onclick="closePopup()" style="position: relative; top: 10px;">Cancel</button>
+            		</div>
+        	</div>
+				
+    `		;
+
+    	const popupContainer = document.createElement("div");
+    	popupContainer.innerHTML = formHTML;
+    	document.body.appendChild(popupContainer);
+
+    	document.querySelector("#main-content").classList.add("blurred");
+	}
+
+	<!--Support C-->
+		function supportc() {
+    		const formHTML = `
+        		<div class="popup-background">
+						<div class="popup-container" style="height: 300px;">
+                		<h3 style="position: center; font-size: 25px;">Support Center</h3>
+                		<label for="gameTitle">I cannot sync my Email Account<br><br><br></label>
+                		<label for="gameDescription">Description:</label>
+                		<textarea id="gameDescription" placeholder="Explain said Issue/Problem."style="position: relative; right: 8px;"></textarea>
+                		<button onclick="closePopup()" style="position: relative; top: 10px;">Submit</button>
+                		<button onclick="closePopup()" style="position: relative; top: 10px;">Cancel</button>
+            		</div>
+        	</div>
+				
+    `		;
+
+    	const popupContainer = document.createElement("div");
+    	popupContainer.innerHTML = formHTML;
+    	document.body.appendChild(popupContainer);
+
+    	document.querySelector("#main-content").classList.add("blurred");
+	}
+
+        window.onload = () => loadContent('home');
+		
+		function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+function releasecategory() {
+    const cardsSection = document.getElementById("releasecategory");
+    const position = cardsSection.getBoundingClientRect().top + window.pageYOffset;
+	
+	window.scrollTo({
+		top: position - 150,
+        behavior: 'smooth'
+    });
+}
+
+</script>
+</head>
+
+<body>
+
+	<!--PAGE ADVANCEMENT BUTTONS-->
+    	<header>
+        	<a id="logo-button" href="#" onclick="loadContent('home')">
+            	<img src="icon.png" style="position: center;">
+        	</a>
+        <nav>
+            	<a href="#" onclick="loadContent('home')">Home</a>
+            	<a href="#" onclick="loadContent('store')">Store</a>
+            	<a href="#" onclick="loadContent('about')">About</a>
+				<a href="#" onclick="loadContent('support')">Support</a>
+        </nav>
+    	</header>
+
+<div id="main-content">
+</div>
+
+	<!--COPYRIGHT FOOTER-->
+	<footer style="z-index: 1;">
+		<p>______________________________________________</p>
+		<img src="icon.png" width="75" height="75">
+        	<p class="copyrighttext">&copy; 2024 DriftCast. All rights reserved.</p>
+	</footer>
+</body>
+</html>
